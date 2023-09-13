@@ -17,6 +17,7 @@ type RabbitBroker struct {
 
 /*
 CreateBroker creates a broker
+
 	config: *ConnectionConfig, the connection configuration that should be used to connect to the broker
 	Returns Broker and a possible error
 */
@@ -98,6 +99,7 @@ func CreateBroker(config *ConnectionConfig) (Broker, error) {
 
 /*
 CreateConsumer creates a consumer
+
 	queue: *Queue, the queue this consumer should bind to
 	bindingKey: string, the key with which this consumer binds to the queue
 	errorHandler: func(error), the function to handle possible consumer errors
@@ -114,6 +116,7 @@ func (b *RabbitBroker) CreateConsumer(queue *Queue, bindingKey string, consumerT
 
 /*
 CreateProducer creates a producer
+
 	exchange: *Exchange, the exchange this producer will produce to
 	errorHandler: func(ProducerError), the errorhandler for this producer
 	Returns: Producer and a possible error

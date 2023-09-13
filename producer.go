@@ -28,14 +28,14 @@ func (c *connection) createProducer(exchange *Exchange) (*RabbitProducer, error)
 	}
 
 	// Open channel to broker
-	err = p.openChannel(c)
+	err = p.openChannel(p.conn)
 	if err != nil {
 		// Throw error that channel could not be opened
 		return nil, err
 	}
 
 	// Declare the exchange
-	err = p.declareExchange(exchange)
+	err = p.declareExchange(p.exchange)
 	if err != nil {
 		// Throw error that the exchange could not be declared
 		return nil, err
@@ -50,7 +50,7 @@ func (c *connection) createProducer(exchange *Exchange) (*RabbitProducer, error)
 	// Listen for returned messages from the broker
 	// p.listenForReturnedMessages()
 
-	log.Info().Str("exchange", exchange.name).Msg("created producer")
+	log.Info().Str("exchange", p.exchange.name).Msg("created producer")
 
 	return p, nil
 }
@@ -132,7 +132,24 @@ func (p *RabbitProducer) PublishMessage(msg []byte, key *string, headers *amqp.T
 		},
 	)
 	if err != nil {
-		log.Error().Str("type", "producer").AnErr("err", err).Str("routingKey", *key).Str("exchange", p.exchange.name).Msg("error during message production")
+		p.ReconnectChannel()
+		err := p.channel.Publish(
+			p.exchange.name,
+			*key,
+			false,
+			false,
+			amqp.Publishing{
+				DeliveryMode: amqp.Transient,
+				ContentType:  "plaintext",
+				Body:         msg,
+				Timestamp:    time.Now(),
+				Headers:      *headers,
+			},
+		)
+
+		if err != nil {
+			log.Error().Str("type", "producer").AnErr("err", err).Str("routingKey", *key).Str("exchange", p.exchange.name).Msg("error during message production")
+		}
 	}
 }
 
