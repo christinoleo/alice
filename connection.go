@@ -40,9 +40,7 @@ func (c *connection) reconnect(t string, ch chan *amqp.Error) {
 
 		if err != nil {
 			log.Error().AnErr("err", err).Str("connType", t).Msg("failed to reconnect")
-		}
-
-		if !c.conn.IsClosed() {
+		} else if !c.conn.IsClosed() {
 			go c.reconnect(t, c.conn.NotifyClose(make(chan *amqp.Error)))
 			ticker.Stop()
 			break

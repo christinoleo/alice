@@ -6,7 +6,8 @@
 </p>
 
 # Alice
-[![GoDoc](https://pkg.go.dev/badge/github.com/thijsheijden/alice?utm_source=godoc)](https://pkg.go.dev/github.com/thijsheijden/alice#section-documentation)
+
+[![GoDoc](https://pkg.go.dev/badge/github.com/christinoleo/alice?utm_source=godoc)](https://pkg.go.dev/github.com/christinoleo/alice#section-documentation)
 
 Alice is a wrapper around the Streadway <a href="">amqp</a> package, designed to be easier to use and offer automatic handling of many errors out of the box.
 
@@ -14,6 +15,7 @@ Alice is a wrapper around the Streadway <a href="">amqp</a> package, designed to
 Credit for the cute Gopher goes to <a href="https://it_me-ian.artstation.com/">Ian Derksen</a>
 
 ## Features
+
 - Automatic broker reconnect (attempted at a user-defined interval)
 - Automatic producer and consumer reconnect upon channel error
 - Every message handled in a new routine
@@ -22,11 +24,13 @@ Credit for the cute Gopher goes to <a href="https://it_me-ian.artstation.com/">I
 - Fully mocked broker, consumer and producer for testing
 
 ## Installation
+
 ```shell
-go get github.com/thijsheijden/alice
+go get github.com/christinoleo/alice
 ```
 
 ## Quickstart
+
 ```go
 package main
 
@@ -36,7 +40,7 @@ import (
 	"time"
 
 	"github.com/streadway/amqp"
-	"github.com/thijsheijden/alice"
+	"github.com/christinoleo/alice"
 )
 
 func main() {

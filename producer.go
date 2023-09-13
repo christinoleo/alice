@@ -45,10 +45,10 @@ func (c *connection) createProducer(exchange *Exchange) (*RabbitProducer, error)
 	p.listenForClose()
 
 	// Listen for overflow messages from broker
-	p.listenForFlow()
+	// p.listenForFlow()
 
 	// Listen for returned messages from the broker
-	p.listenForReturnedMessages()
+	// p.listenForReturnedMessages()
 
 	log.Info().Str("exchange", exchange.name).Msg("created producer")
 

@@ -5,8 +5,8 @@ import (
 	"log"
 	"time"
 
+	"github.com/christinoleo/alice"
 	"github.com/streadway/amqp"
-	"github.com/thijsheijden/alice"
 )
 
 func main() {
