@@ -16,6 +16,7 @@ type Consumer interface {
 
 // A Producer models a broker producer
 type Producer interface {
+	PublishMessageJsonHeaders(body *[]byte, routingKey string, headers *map[string]interface{})
 	PublishMessage(msg []byte, key *string, headers *amqp.Table)
 	Shutdown() error
 }

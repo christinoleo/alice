@@ -10,6 +10,17 @@ type MockProducer struct {
 	broker   *MockBroker
 }
 
+// PublishMessageJsonHeaders publishes a message with JSON headers
+func (p *MockProducer) PublishMessageJsonHeaders(body *[]byte, routingKey string, headers *map[string]interface{}) {
+	h := amqp.Table{}
+
+	for k, v := range *headers {
+		h[k] = v
+	}
+
+	p.PublishMessage(*body, &routingKey, &h)
+}
+
 // PublishMessage publishes a message
 func (p *MockProducer) PublishMessage(msg []byte, key *string, headers *amqp.Table) {
 	// Find the queues this message was meant for

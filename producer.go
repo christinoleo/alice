@@ -113,6 +113,23 @@ func (p *RabbitProducer) listenForReturnedMessages() {
 	}()
 }
 
+/*
+PublishMessageJsonHeaders publishes a message with the specified routing key
+
+	body: *[]byte, the message to send, most likely a marshalled JSON object
+	routingKey: string, the key by which this message will be routed on the exchange
+	headers: *map[string]interface{}, the headers for this message, containing things like clientID and sessionID
+*/
+func (p *RabbitProducer) PublishMessageJsonHeaders(body *[]byte, routingKey string, headers *map[string]interface{}) {
+	h := amqp.Table{}
+
+	for k, v := range *headers {
+		h[k] = v
+	}
+
+	p.PublishMessage(*body, &routingKey, &h)
+}
+
 // PublishMessage publishes a message with the given routing key
 func (p *RabbitProducer) PublishMessage(msg []byte, key *string, headers *amqp.Table) {
 
