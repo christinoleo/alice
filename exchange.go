@@ -3,7 +3,7 @@ package alice
 import (
 	"errors"
 
-	"github.com/streadway/amqp"
+	amqp "github.com/rabbitmq/amqp091-go"
 )
 
 // Exchange models a RabbitMQ exchange
@@ -49,6 +49,7 @@ func (t *ExchangeType) IsValid() bool {
 }
 
 // CreateDefaultExchange returns an exchange with the following specifications:
+//
 //	durable: true, autodelete: false, internal: false, noWait: false, args: nil
 func CreateDefaultExchange(name string, exchangeType ExchangeType) (*Exchange, error) {
 	return CreateExchange(name, exchangeType, true, false, false, false, nil)

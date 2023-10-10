@@ -1,6 +1,6 @@
 package alice
 
-import "github.com/streadway/amqp"
+import amqp "github.com/rabbitmq/amqp091-go"
 
 // Queue models a RabbitMQ queue
 type Queue struct {
@@ -15,6 +15,7 @@ type Queue struct {
 }
 
 // CreateDefaultQueue creates and returns a queue with the following parameters:
+//
 //	durable: true, exclusive, false, autoDelete: false, noWait: false, args: nil
 func CreateDefaultQueue(exchange *Exchange, name string) *Queue {
 	return CreateQueue(exchange, name, true, false, false, false, nil)

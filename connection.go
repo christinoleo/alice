@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
+	amqp "github.com/rabbitmq/amqp091-go"
 	"github.com/rs/zerolog/log"
-	"github.com/streadway/amqp"
 )
 
 // connection models a RabbitMQ connection

@@ -1,7 +1,7 @@
 package alice
 
 import (
-	"github.com/streadway/amqp"
+	amqp "github.com/rabbitmq/amqp091-go"
 )
 
 // MockBroker implements the Broker interface (mock)

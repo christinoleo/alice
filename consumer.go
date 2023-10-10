@@ -3,8 +3,8 @@ package alice
 import (
 	"time"
 
+	amqp "github.com/rabbitmq/amqp091-go"
 	"github.com/rs/zerolog/log"
-	"github.com/streadway/amqp"
 )
 
 // RabbitConsumer models a RabbitMQ consumer
@@ -21,6 +21,7 @@ type RabbitConsumer struct {
 
 /*
 ConsumeMessages starts the consumption of messages from the queue the consumer is bound to
+
 	args: amqp.Table, additional arguments for this consumer
 	autoAck: bool, whether to automatically acknowledge messages
 	messageHandler: func(amqp.Delivery), a handler for incoming messages. Every message the handler is called in a new goroutine

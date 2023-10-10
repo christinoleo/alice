@@ -1,6 +1,6 @@
 package alice
 
-import "github.com/streadway/amqp"
+import amqp "github.com/rabbitmq/amqp091-go"
 
 // A Broker models a broker
 type Broker interface {
