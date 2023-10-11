@@ -118,7 +118,7 @@ PublishMessageJsonHeaders publishes a message with the specified routing key
 
 	body: *[]byte, the message to send, most likely a marshalled JSON object
 	routingKey: string, the key by which this message will be routed on the exchange
-	headers: *map[string]interface{}, the headers for this message, containing things like clientID and sessionID
+	headers: *map[string]interface{}, the headers for this message, containing things like userID and sessionID
 */
 func (p *RabbitProducer) PublishMessageJsonHeaders(body *[]byte, routingKey string, headers *map[string]interface{}) {
 	h := amqp.Table{}
