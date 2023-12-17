@@ -1,6 +1,7 @@
 package alice
 
 import (
+	"context"
 	"time"
 
 	amqp "github.com/rabbitmq/amqp091-go"
@@ -135,7 +136,8 @@ func (p *RabbitProducer) PublishMessage(msg []byte, key *string, headers *amqp.T
 
 	log.Trace().Str("type", "producer").Str("routingKey", *key).Str("exchange", p.exchange.name).Int("msgSize", len(msg)).Msg("producing message")
 
-	err := p.channel.Publish(
+	err := p.channel.PublishWithContext(
+		context.Background(),
 		p.exchange.name,
 		*key,
 		false,
@@ -150,7 +152,8 @@ func (p *RabbitProducer) PublishMessage(msg []byte, key *string, headers *amqp.T
 	)
 	if err != nil {
 		p.ReconnectChannel()
-		err := p.channel.Publish(
+		err := p.channel.PublishWithContext(
+			context.Background(),
 			p.exchange.name,
 			*key,
 			false,
