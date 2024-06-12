@@ -1,6 +1,6 @@
 module github.com/christinoleo/alice
 
-go 1.21
+go 1.22
 
 require (
 	github.com/rabbitmq/amqp091-go v1.9.0
